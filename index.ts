@@ -3,7 +3,10 @@ import * as github from "@actions/github"
 
 try {
 	// `who-to-greet` input defined in action metadata file
-	const files = core.getInput("files").split(",")
+	const files = core
+		.getInput("files")
+		.split(",")
+		.map((file) => file.trim())
 
 	console.log(files)
 

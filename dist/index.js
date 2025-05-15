@@ -44,7 +44,10 @@ const core = __importStar(__nccwpck_require__(7484));
 const github = __importStar(__nccwpck_require__(3228));
 try {
     // `who-to-greet` input defined in action metadata file
-    const files = core.getInput("files").split(",");
+    const files = core
+        .getInput("files")
+        .split(",")
+        .map((file) => file.trim());
     console.log(files);
     // Get the JSON webhook payload for the event that triggered the workflow
     const payload = JSON.stringify(github.context.payload, undefined, 2);
