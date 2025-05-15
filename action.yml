@@ -1,0 +1,10 @@
+name: "Upload To Release"
+description: "Uploads specified files to a release"
+inputs:
+    files: # input for multiple file names (comma-separated)
+        description: "Comma-separated list of file paths to upload"
+        required: true
+
+runs:
+    using: "node20"
+    main: "index.js"
