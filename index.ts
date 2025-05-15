@@ -23,7 +23,7 @@ try {
 		.map((file) => file.trim())
 
 	for (const file of files) {
-		exec("gh", ["release", "upload", "version", file])
+		exec("gh", ["release", "upload", version, file])
 	}
 } catch (error) {
 	setFailed(error.message)

@@ -27514,6 +27514,14 @@ function parseParams (str) {
 module.exports = parseParams
 
 
+/***/ }),
+
+/***/ 6089:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"name":"upload-to-release","version":"0.1.0","main":"dist/index.js","scripts":{"compile":"npm run build && ncc build dist/index.js","build":"tsc"},"keywords":[],"author":"","license":"MIT","description":"","dependencies":{"@actions/core":"^1.11.1","@actions/exec":"^1.1.1","@actions/github":"^6.0.1"},"devDependencies":{"@types/node":"^22.15.18","@vercel/ncc":"^0.38.3","typescript":"^5.8.3"}}');
+
 /***/ })
 
 /******/ 	});
@@ -27563,6 +27571,7 @@ var exports = __webpack_exports__;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __nccwpck_require__(7484);
 const os_1 = __nccwpck_require__(857);
+const package_json_1 = __nccwpck_require__(6089);
 const exec_1 = __nccwpck_require__(5236);
 try {
     let osString = "";
@@ -27583,7 +27592,7 @@ try {
         .split(",")
         .map((file) => file.trim());
     for (const file of files) {
-        (0, exec_1.exec)("gh", ["release", "upload", "version", file]);
+        (0, exec_1.exec)("gh", ["release", "upload", package_json_1.version, file]);
     }
 }
 catch (error) {
