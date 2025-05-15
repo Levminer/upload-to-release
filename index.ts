@@ -3,9 +3,9 @@ import * as github from "@actions/github"
 
 try {
 	// `who-to-greet` input defined in action metadata file
-	const files = core.getInput("files")
+	const files = core.getInput("files").split(",")
 
-	console.log(`files: ${files}!`)
+	console.log(files)
 
 	// Get the JSON webhook payload for the event that triggered the workflow
 	const payload = JSON.stringify(github.context.payload, undefined, 2)
