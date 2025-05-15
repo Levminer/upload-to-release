@@ -2,6 +2,7 @@ import { getInput, setFailed } from "@actions/core"
 import * as github from "@actions/github"
 import { platform } from "os"
 import { version } from "./package.json"
+import { exec } from "@actions/exec"
 
 try {
 	let osString = ""
@@ -21,10 +22,9 @@ try {
 		.split(",")
 		.map((file) => file.trim())
 
-	// get latest tag
-
-	console.log(`The latest version is: ${version}`)
-	console.log(`The event payload: ${github.context.ref}`)
+	for (const file of files) {
+		exec("gh", ["release", "upload", "version", file])
+	}
 } catch (error) {
 	setFailed(error.message)
 }
