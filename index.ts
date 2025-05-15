@@ -1,18 +1,28 @@
-import * as core from "@actions/core"
+import { getInput, setFailed } from "@actions/core"
 import * as github from "@actions/github"
+import { platform } from "os"
 
 try {
-	// `who-to-greet` input defined in action metadata file
-	const files = core
-		.getInput("files")
+	let osString = ""
+	const os = platform()
+
+	if (os === "win32") {
+		osString = "windows"
+	} else if (os === "darwin") {
+		osString = "macos"
+	} else if (os === "linux") {
+		osString = "linux"
+	} else {
+		setFailed(`Unsupported OS: ${os}`)
+	}
+
+	const files = getInput(`${osString}-files`)
 		.split(",")
 		.map((file) => file.trim())
 
 	console.log(files)
 
-	// Get the JSON webhook payload for the event that triggered the workflow
-	const payload = JSON.stringify(github.context.payload, undefined, 2)
-	console.log(`The event payload: ${payload}`)
+	console.log(`The event payload: ${github.context.ref}`)
 } catch (error) {
-	core.setFailed(error.message)
+	setFailed(error.message)
 }

@@ -40,21 +40,32 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core = __importStar(__nccwpck_require__(7484));
+const core_1 = __nccwpck_require__(7484);
 const github = __importStar(__nccwpck_require__(3228));
+const os_1 = __nccwpck_require__(857);
 try {
-    // `who-to-greet` input defined in action metadata file
-    const files = core
-        .getInput("files")
+    let osString = "";
+    const os = (0, os_1.platform)();
+    if (os === "win32") {
+        osString = "windows";
+    }
+    else if (os === "darwin") {
+        osString = "macos";
+    }
+    else if (os === "linux") {
+        osString = "linux";
+    }
+    else {
+        (0, core_1.setFailed)(`Unsupported OS: ${os}`);
+    }
+    const files = (0, core_1.getInput)(`${osString}-files`)
         .split(",")
         .map((file) => file.trim());
     console.log(files);
-    // Get the JSON webhook payload for the event that triggered the workflow
-    const payload = JSON.stringify(github.context.payload, undefined, 2);
-    console.log(`The event payload: ${payload}`);
+    console.log(`The event payload: ${github.context.ref}`);
 }
 catch (error) {
-    core.setFailed(error.message);
+    (0, core_1.setFailed)(error.message);
 }
 
 

@@ -18,4 +18,4 @@ jobs:
               id: upload
               uses: levminer/upload-to-release@test
               with:
-                  files: "package.json, package-lock.json"
+                  linux-files: "package.json, package-lock.json"

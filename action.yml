@@ -1,7 +1,13 @@
 name: "Upload To Release"
 description: "Uploads specified files to a release"
 inputs:
-    files: # input for multiple file names (comma-separated)
+    windows-files:
+        description: "Comma-separated list of file paths to upload"
+        required: true
+    linux-files:
+        description: "Comma-separated list of file paths to upload"
+        required: true
+    macos-files:
         description: "Comma-separated list of file paths to upload"
         required: true
 
