@@ -1,5 +1,4 @@
 import { getInput, setFailed } from "@actions/core"
-import * as github from "@actions/github"
 import { platform } from "os"
 import { version } from "./package.json"
 import { exec } from "@actions/exec"
