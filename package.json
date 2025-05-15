@@ -1,6 +1,6 @@
 {
 	"name": "upload-to-release",
-	"version": "1.0.0",
+	"version": "0.1.0",
 	"main": "dist/index.js",
 	"scripts": {
 		"compile": "npm run build && ncc build dist/index.js",

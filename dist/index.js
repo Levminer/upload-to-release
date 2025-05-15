@@ -43,6 +43,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __nccwpck_require__(7484);
 const github = __importStar(__nccwpck_require__(3228));
 const os_1 = __nccwpck_require__(857);
+const package_json_1 = __nccwpck_require__(6089);
 try {
     let osString = "";
     const os = (0, os_1.platform)();
@@ -61,7 +62,8 @@ try {
     const files = (0, core_1.getInput)(`${osString}-files`)
         .split(",")
         .map((file) => file.trim());
-    console.log(files);
+    // get latest tag
+    console.log(`The latest version is: ${package_json_1.version}`);
     console.log(`The event payload: ${github.context.ref}`);
 }
 catch (error) {
@@ -31855,6 +31857,14 @@ function parseParams (str) {
 
 module.exports = parseParams
 
+
+/***/ }),
+
+/***/ 6089:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"name":"upload-to-release","version":"0.1.0","main":"dist/index.js","scripts":{"compile":"npm run build && ncc build dist/index.js","build":"tsc"},"keywords":[],"author":"","license":"MIT","description":"","dependencies":{"@actions/core":"^1.11.1","@actions/exec":"^1.1.1","@actions/github":"^6.0.1"},"devDependencies":{"@types/node":"^22.15.18","@vercel/ncc":"^0.38.3","typescript":"^5.8.3"}}');
 
 /***/ })
 

@@ -1,6 +1,7 @@
 import { getInput, setFailed } from "@actions/core"
 import * as github from "@actions/github"
 import { platform } from "os"
+import { version } from "./package.json"
 
 try {
 	let osString = ""
@@ -20,8 +21,9 @@ try {
 		.split(",")
 		.map((file) => file.trim())
 
-	console.log(files)
+	// get latest tag
 
+	console.log(`The latest version is: ${version}`)
 	console.log(`The event payload: ${github.context.ref}`)
 } catch (error) {
 	setFailed(error.message)
