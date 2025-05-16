@@ -2,14 +2,14 @@ name: "Upload To Release"
 description: "Uploads specified files to a release"
 inputs:
     windows-files:
-        description: "Comma-separated list of file paths to upload"
-        required: true
+        description: "Comma-separated list of file paths to upload. Use %v to specify the version."
+        required: false
     linux-files:
-        description: "Comma-separated list of file paths to upload"
-        required: true
+        description: "Comma-separated list of file paths to upload. Use %v to specify the version."
+        required: false
     macos-files:
-        description: "Comma-separated list of file paths to upload"
-        required: true
+        description: "Comma-separated list of file paths to upload. Use %v to specify the version."
+        required: false
 
 runs:
     using: "node20"

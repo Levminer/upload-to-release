@@ -27589,6 +27589,7 @@ try {
         (0, core_1.setFailed)(`Unsupported OS: ${os}`);
     }
     const files = (0, core_1.getInput)(`${osString}-files`)
+        .replaceAll("%v", package_json_1.version)
         .split(",")
         .map((file) => file.trim());
     for (const file of files) {

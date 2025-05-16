@@ -18,6 +18,7 @@ try {
 	}
 
 	const files = getInput(`${osString}-files`)
+		.replaceAll("%v", version)
 		.split(",")
 		.map((file) => file.trim())
 
