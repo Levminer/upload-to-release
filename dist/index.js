@@ -27579,7 +27579,7 @@ try {
         try {
             let osString = "";
             const os = (0, os_1.platform)();
-            const overwrite = (0, core_1.getInput)("overwrite").toLowerCase() === "true";
+            const overwrite = (0, core_1.getInput)("overwrite-files").toLowerCase() === "true";
             if (os === "win32") {
                 osString = "windows";
             }

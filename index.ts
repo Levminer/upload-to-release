@@ -8,7 +8,7 @@ try {
 		try {
 			let osString = ""
 			const os = platform()
-			const overwrite = getInput("overwrite").toLowerCase() === "true"
+			const overwrite = getInput("overwrite-files").toLowerCase() === "true"
 
 			if (os === "win32") {
 				osString = "windows"
