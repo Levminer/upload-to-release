@@ -1,0 +1,23 @@
+{
+	"name": "upload-to-release",
+	"version": "0.1.0",
+	"main": "dist/index.js",
+	"scripts": {
+		"compile": "npm run build && ncc build dist/index.js",
+		"build": "tsc"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "MIT",
+	"description": "",
+	"dependencies": {
+		"@actions/core": "^1.11.1",
+		"@actions/exec": "^1.1.1",
+		"@actions/github": "^6.0.1"
+	},
+	"devDependencies": {
+		"@types/node": "^22.15.18",
+		"@vercel/ncc": "^0.38.3",
+		"typescript": "^5.8.3"
+	}
+}
