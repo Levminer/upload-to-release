@@ -19,3 +19,4 @@ jobs:
               uses: levminer/upload-to-release@test
               with:
                   linux-files: "test/file.txt, test/file-%v.txt"
+                  overwrite: "true"
