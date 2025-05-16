@@ -8,6 +8,7 @@ try {
 		try {
 			let osString = ""
 			const os = platform()
+			const overwrite = getInput("overwrite").toLowerCase() === "true"
 
 			if (os === "win32") {
 				osString = "windows"
@@ -26,7 +27,13 @@ try {
 				.map((file) => file.trim())
 
 			for (const file of files) {
-				await exec("gh", ["release", "upload", version, file])
+				const args = ["release", "upload", version, file]
+
+				if (overwrite) {
+					args.push("--clobber")
+				}
+
+				await exec("gh", args)
 			}
 		} catch (error) {
 			setFailed(error.message)

@@ -10,6 +10,10 @@ inputs:
     macos-files:
         description: "Comma-separated list of file paths to upload. Use %v to specify the version."
         required: false
+    overwrite-files:
+        description: "Overwrite existing files in the release."
+        default: "false"
+        required: false
 
 runs:
     using: "node20"

@@ -27579,6 +27579,7 @@ try {
         try {
             let osString = "";
             const os = (0, os_1.platform)();
+            const overwrite = (0, core_1.getInput)("overwrite").toLowerCase() === "true";
             if (os === "win32") {
                 osString = "windows";
             }
@@ -27597,7 +27598,11 @@ try {
                 .split(",")
                 .map((file) => file.trim());
             for (const file of files) {
-                await (0, exec_1.exec)("gh", ["release", "upload", package_json_1.version, file]);
+                const args = ["release", "upload", package_json_1.version, file];
+                if (overwrite) {
+                    args.push("--clobber");
+                }
+                await (0, exec_1.exec)("gh", args);
             }
         }
         catch (error) {
