@@ -27574,27 +27574,36 @@ const os_1 = __nccwpck_require__(857);
 const package_json_1 = __nccwpck_require__(6089);
 const exec_1 = __nccwpck_require__(5236);
 try {
-    let osString = "";
-    const os = (0, os_1.platform)();
-    if (os === "win32") {
-        osString = "windows";
-    }
-    else if (os === "darwin") {
-        osString = "macos";
-    }
-    else if (os === "linux") {
-        osString = "linux";
-    }
-    else {
-        (0, core_1.setFailed)(`Unsupported OS: ${os}`);
-    }
-    const files = (0, core_1.getInput)(`${osString}-files`)
-        .replaceAll("%v", package_json_1.version)
-        .split(",")
-        .map((file) => file.trim());
-    for (const file of files) {
-        (0, exec_1.exec)("gh", ["release", "upload", package_json_1.version, file]);
-    }
+    ;
+    (async () => {
+        try {
+            let osString = "";
+            const os = (0, os_1.platform)();
+            if (os === "win32") {
+                osString = "windows";
+            }
+            else if (os === "darwin") {
+                osString = "macos";
+            }
+            else if (os === "linux") {
+                osString = "linux";
+            }
+            else {
+                (0, core_1.setFailed)(`Unsupported OS: ${os}`);
+                return;
+            }
+            const files = (0, core_1.getInput)(`${osString}-files`)
+                .replaceAll("%v", package_json_1.version)
+                .split(",")
+                .map((file) => file.trim());
+            for (const file of files) {
+                await (0, exec_1.exec)("gh", ["release", "upload", package_json_1.version, file]);
+            }
+        }
+        catch (error) {
+            (0, core_1.setFailed)(error.message);
+        }
+    })();
 }
 catch (error) {
     (0, core_1.setFailed)(error.message);
