@@ -27514,14 +27514,6 @@ function parseParams (str) {
 module.exports = parseParams
 
 
-/***/ }),
-
-/***/ 6089:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"name":"upload-to-release","version":"0.1.0","main":"dist/index.js","scripts":{"compile":"npm run build && ncc build dist/index.js","build":"tsc"},"keywords":[],"author":"","license":"MIT","description":"","dependencies":{"@actions/core":"^1.11.1","@actions/exec":"^1.1.1","@actions/github":"^6.0.1"},"devDependencies":{"@types/node":"^22.15.18","@vercel/ncc":"^0.38.3","typescript":"^5.8.3"}}');
-
 /***/ })
 
 /******/ 	});
@@ -27571,8 +27563,9 @@ var exports = __webpack_exports__;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __nccwpck_require__(7484);
 const os_1 = __nccwpck_require__(857);
-const package_json_1 = __nccwpck_require__(6089);
 const exec_1 = __nccwpck_require__(5236);
+const path_1 = __nccwpck_require__(6928);
+const fs_1 = __nccwpck_require__(9896);
 try {
     ;
     (async () => {
@@ -27580,6 +27573,9 @@ try {
             let osString = "";
             const os = (0, os_1.platform)();
             const overwrite = (0, core_1.getInput)("overwrite-files").toLowerCase() === "true";
+            const workspace = process.env.GITHUB_WORKSPACE;
+            const versionPath = (0, path_1.join)(workspace, "package.json");
+            const version = JSON.parse((0, fs_1.readFileSync)(versionPath, "utf-8")).version;
             if (os === "win32") {
                 osString = "windows";
             }
@@ -27594,11 +27590,11 @@ try {
                 return;
             }
             const files = (0, core_1.getInput)(`${osString}-files`)
-                .replaceAll("%v", package_json_1.version)
+                .replaceAll("%v", version)
                 .split(",")
                 .map((file) => file.trim());
             for (const file of files) {
-                const args = ["release", "upload", package_json_1.version, file];
+                const args = ["release", "upload", version, (0, path_1.join)(workspace, file)];
                 if (overwrite) {
                     args.push("--clobber");
                 }
