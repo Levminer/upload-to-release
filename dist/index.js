@@ -27600,6 +27600,7 @@ try {
                 }
                 await (0, exec_1.exec)("gh", args);
             }
+            (0, core_1.setOutput)("version", version);
         }
         catch (error) {
             (0, core_1.setFailed)(error.message);

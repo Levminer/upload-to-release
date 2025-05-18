@@ -1,4 +1,4 @@
-import { getInput, setFailed } from "@actions/core"
+import { getInput, setFailed, setOutput } from "@actions/core"
 import { platform } from "os"
 import { exec } from "@actions/exec"
 import { join } from "path"
@@ -40,6 +40,8 @@ try {
 
 				await exec("gh", args)
 			}
+
+			setOutput("version", version)
 		} catch (error) {
 			setFailed(error.message)
 		}
