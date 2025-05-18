@@ -1,7 +1,8 @@
 import { getInput, setFailed } from "@actions/core"
 import { platform } from "os"
-import { version } from "./package.json"
 import { exec } from "@actions/exec"
+import { join } from "path"
+import { readFileSync } from "fs"
 
 try {
 	;(async () => {
@@ -9,6 +10,10 @@ try {
 			let osString = ""
 			const os = platform()
 			const overwrite = getInput("overwrite-files").toLowerCase() === "true"
+
+			const workspace = process.env.GITHUB_WORKSPACE
+			const versionPath = join(workspace, "package.json")
+			const version = JSON.parse(readFileSync(versionPath, "utf-8")).version
 
 			if (os === "win32") {
 				osString = "windows"
@@ -27,7 +32,7 @@ try {
 				.map((file) => file.trim())
 
 			for (const file of files) {
-				const args = ["release", "upload", version, file]
+				const args = ["release", "upload", version, join(workspace, file)]
 
 				if (overwrite) {
 					args.push("--clobber")
